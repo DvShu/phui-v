@@ -1,0 +1,35 @@
+.ph-input-number {
+  width: 180px;
+  display: flex;
+  .ph-input {
+    text-align: center;
+    border-radius: 0;
+    flex-grow: 1;
+  }
+  .ph-input-number__decrease,
+  .ph-input-number__increase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--ph-form-edit-height);
+    height: $width;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    font-size: 16px;
+    background-color: #dedede;
+    color: #606266;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+
+    &:hover,
+    &:active {
+      color: var(--ph-primary-color);
+    }
+  }
+  .ph-input-number__decrease {
+    border-radius: 3px 0 0 3px;
+  }
+  .ph-input-number__increase {
+    border-radius: 0 3px 3px 0;
+  }
+}

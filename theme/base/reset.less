@@ -1,0 +1,42 @@
+/* 移除 body 默认的外边距，并且统一行高 */
+body {
+  margin: 0;
+  line-height: 1.2;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+}
+/* 一般开发网页的时候，都是按照100%来开发 */
+html,
+body {
+  height: 100%;
+}
+/* 修复由于 inline baseline 导致的图片下方的空白间隙问题 */
+img {
+  vertical-align: top;
+}
+/* 非大面积文字排版网站通常不需要列表项，如果需要可单独设置 */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* 统一采用盒子模式 */
+div {
+  box-sizing: border-box;
+}
+/*
+ * 去除链接默认的下划线，提高文字可读性
+ */
+a {
+  text-decoration: none;
+  color: #1657d9;
+  position: relative;
+  &:hover {
+    color: tint(#1657d9, 10%);
+    text-decoration: underline;
+  }
+  &:active {
+    color: tint(#1657d9, 15%);
+  }
+}
