@@ -1,14 +1,14 @@
 <template>
   <div class="ph-input_wrapper" :class="[tip === '' ? '' : 'ph-input-error']">
     <input
-      ref="inputEl"
+      ref="input"
       type="text"
       class="ph-input"
-      :name="name"
-      :placeholder="placeholder"
       :value="modelValue"
       @input="inputText"
       @blur="blur"
+      :name="name"
+      :placeholder="placeholder"
     />
     <span v-if="tip !== ''" class="ph-input-error-tip">{{ tip }}</span>
   </div>
@@ -24,6 +24,7 @@ interface FormItemProps {
   type?: 'text' | 'positive-int';
   /** 原生属性 */
   name?: string;
+  /** 原生属性 */
   placeholder?: string;
   /** 进行数据验证的方式, change - 输入改变时验证, blur - 失去焦点时验证 */
   trigger?: 'change' | 'blur';

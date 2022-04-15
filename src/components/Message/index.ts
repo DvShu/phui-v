@@ -1,5 +1,5 @@
 import { VNode, h, render } from 'vue';
-import MessageTemplate from './Message.vue';
+import MessageTemplate from './message.vue';
 
 const messageTypes = ['info', 'success', 'error', 'warn'];
 const instances: VNode[] = []; // 保存所有的消息体

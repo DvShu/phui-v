@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import Input from './input.vue';
+import Input from './Input.vue';
 import { isBlank } from 'ph-utils/lib/index_m';
 
 const props = defineProps<{

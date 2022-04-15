@@ -8,9 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      insertTypesEntry: true,
       copyDtsFiles: false,
-      cleanVueFileName: false,
     }),
   ],
   build: {
