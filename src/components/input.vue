@@ -1,10 +1,9 @@
 <template>
   <div class="ph-input_wrapper" :class="[tip === '' ? '' : 'ph-input-error']">
     <input
-      ref="input"
-      type="text"
+      v-model="inputData"
+      :type="type === 'positive-int' ? 'text' : type"
       class="ph-input"
-      :value="modelValue"
       @input="inputText"
       @blur="blur"
       :name="name"
@@ -15,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref, onUnmounted } from 'vue';
+import { inject, ref, onUnmounted, watch } from 'vue';
 import Validator, { RuleType } from 'ph-utils/lib/validator_m';
-import { FormRegistInput } from './types';
+import { FormRegistInput, validatorKey, formRegistKey } from './types';
 
 interface FormItemProps {
   /** 标签 */
@@ -31,8 +30,7 @@ interface FormItemProps {
   rules?: RuleType[];
   modelValue?: string;
 }
-const tip = ref('');
-const inputEl = ref<HTMLInputElement>(null as any);
+const tip = ref(''); // 错误提示
 const props = withDefaults(defineProps<FormItemProps>(), {
   type: 'text',
   name: '',
@@ -43,8 +41,19 @@ const props = withDefaults(defineProps<FormItemProps>(), {
 });
 const emit = defineEmits(['update:modelValue']);
 
+const inputData = ref(props.modelValue);
+
+// 监听主动修改输入框的值
+watch(
+  () => props.modelValue,
+  (v) => {
+    inputData.value = v;
+    validData(v);
+  }
+);
+
 let validator = inject(
-  'phFormValidator',
+  validatorKey,
   props.rules != null && props.name !== ''
     ? new Validator([{ key: props.name, rules: props.rules }])
     : null
@@ -63,11 +72,11 @@ function isError() {
 }
 
 function value() {
-  return inputEl.value.value;
+  return inputData.value;
 }
 
 const regist = inject<((name: string, ipt: FormRegistInput) => void) | null>(
-  'phFormRegist',
+  formRegistKey,
   null
 );
 

@@ -10,9 +10,15 @@ import Message from './message';
 import Button from './Button.vue';
 import InputNumber from './input_number.vue';
 import Tabbar from './tabbar.vue';
-import UserLinkIcon from './icon/UseLink.vue';
+import UseLinkIcon from './icon/UseLink.vue';
+import Form from './Form.vue';
+import FormItem from './FormItem.vue';
+import TimeIcon from './icon/Time.vue';
+import ArrowDownIcon from './icon/ArrowDown.vue';
 
 export {
+  Form,
+  FormItem,
   Input,
   CloseIcon,
   ErrorIcon,
@@ -25,5 +31,7 @@ export {
   Button,
   InputNumber,
   Tabbar,
-  UserLinkIcon,
+  UseLinkIcon,
+  TimeIcon,
+  ArrowDownIcon,
 };

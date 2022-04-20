@@ -15,7 +15,7 @@ withDefaults(
     prefix?: string;
   }>(),
   {
-    prefix: 'ph-icon-',
+    prefix: 'icon-',
   }
 );
 </script>
