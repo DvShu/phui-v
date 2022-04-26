@@ -1,17 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Input as PhInput } from './components';
-
-const n = ref(1);
-
-const t = ref('a');
-
-function blur() {
-  console.log('失去焦点');
-}
+import {
+  LoadingIcon,
+  ArrowDownIcon,
+  InfoIcon,
+  TimeIcon,
+  WarnIcon,
+  CloseIcon,
+  ErrorIcon,
+  SuccessIcon,
+} from './components';
 </script>
 
-<template><PhInput placeholder="请输入用户命" @blur="blur"></PhInput></template>
+<template>
+  <p>图标</p>
+  <div>
+    <LoadingIcon></LoadingIcon>
+    <ArrowDownIcon></ArrowDownIcon>
+    <InfoIcon></InfoIcon>
+    <TimeIcon></TimeIcon>
+    <WarnIcon></WarnIcon>
+    <CloseIcon></CloseIcon>
+    <ErrorIcon></ErrorIcon>
+    <SuccessIcon></SuccessIcon>
+  </div>
+</template>
 
 <style>
 #app {
