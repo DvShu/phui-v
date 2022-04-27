@@ -13,18 +13,19 @@ interface MessageOption {
   message: string;
   /** 消息类型：error、warning、success、info */
   type?: string;
-  /** 宽度 *
+  /** 宽度 */
   width?: string;
   /** 自定义类名 */
   'custom-class'?: string;
 }
 
 interface MessageInstance {
-  (option: string | MessageOption): void;
-  info: (msg: string | MessageOption) => void;
-  warn: (msg: string | MessageOption) => void;
-  success: (msg: string | MessageOption) => void;
-  error: (msg: string | MessageOption) => void;
+  (option: string | MessageOption): string;
+  info: (msg: string | MessageOption) => string;
+  warn: (msg: string | MessageOption) => string;
+  success: (msg: string | MessageOption) => string;
+  error: (msg: string | MessageOption) => string;
+  close: (id: string) => void;
   [index: string]: any;
 }
 
@@ -32,10 +33,7 @@ interface MessageInstance {
 function close(id: string) {
   // 查询需要删除的消息节点
   let idx = instances.findIndex((vm) => {
-    if (vm.component != null) {
-      return vm.component.props.id === id;
-    }
-    return false;
+    return vm.component != null && vm.component.props.id === id;
   });
   if (idx === -1) return;
   // 从消息列表中移除消息
@@ -84,10 +82,10 @@ const Message: MessageInstance = ((option: string | MessageOption) => {
   };
 
   const vm = h(MessageTemplate, props);
-
   render(vm, container);
   instances.push(vm);
   document.body.appendChild(container.firstElementChild as any);
+  return id;
 }) as any;
 
 messageTypes.forEach((type: string) => {
@@ -95,8 +93,18 @@ messageTypes.forEach((type: string) => {
     let opts: MessageOption =
       typeof options === 'string' ? { message: options } : options;
     opts.type = type as any;
-    Message(opts);
+    return Message(opts);
   };
 });
+
+/** 手动关闭消息 */
+Message.close = (id: string) => {
+  let ist = instances.find((vm) => {
+    return vm.component != null && vm.component.props.id === id;
+  });
+  if (ist != null) {
+    (ist.component as any).exposed.close();
+  }
+};
 
 export default Message;

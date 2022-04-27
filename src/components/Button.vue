@@ -19,66 +19,39 @@
   </button>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue';
+<script setup lang="ts">
 import LoadingIcon from './icon/Loading.vue';
 
-export default defineComponent({
-  name: 'PhButton',
-  components: {
-    LoadingIcon,
-  },
-  props: {
+const props = withDefaults(
+  defineProps<{
     /**
      * 设置按钮类型；primary, text, normal
      */
-    type: {
-      type: String as PropType<'primary' | 'text' | 'normal'>,
-      required: false,
-      default: 'normal',
-    },
+    type?: 'primary' | 'text' | 'normal';
     /** 是否禁用状态 */
-    disabled: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    disabled?: boolean;
     /** 原生的 type 属性 */
-    htmlType: {
-      type: String,
-      required: false,
-      default: 'button',
-    },
+    htmlType?: string;
     /** 按钮是否适合其父宽度(宽度100%) */
-    block: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    block?: boolean;
     /** 是否是圆形按钮 */
-    circle: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    circle?: boolean;
     /** 是否是弧形按钮 */
-    round: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    round?: boolean;
     /** 加载的时候显示的文本 */
-    loadingText: {
-      type: String,
-      required: false,
-      default: '加载中……',
-    },
+    loadingText?: string;
     /** 是否处于加载状态 */
-    loading: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
-});
+    loading: false;
+  }>(),
+  {
+    type: 'normal',
+    disabled: false,
+    htmlType: 'button',
+    block: false,
+    circle: false,
+    round: false,
+    loadingText: '加载中……',
+    loading: false,
+  }
+);
 </script>

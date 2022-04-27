@@ -1,31 +1,25 @@
 <template>
   <div
     class="ph-switch"
-    :class="{ 'ph-switch--on': isOn }"
+    :class="{ 'ph-switch--on': modelValue }"
     :style="{ fontSize: size + 'px' }"
-    @click="toggleSwitch"
+    @click="emits('update:modelValue', !modelValue)"
   >
     <div class="ph-switch-action"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const isOn = ref(false);
 const props = withDefaults(
   defineProps<{
     size?: number;
+    modelValue?: boolean;
   }>(),
   {
     size: 30,
+    modelValue: false,
   }
 );
 
-const emits = defineEmits(['change']);
-
-function toggleSwitch() {
-  isOn.value = !isOn.value;
-  emits('change', isOn.value);
-}
+const emits = defineEmits(['update:modelValue']);
 </script>

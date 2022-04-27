@@ -68,7 +68,7 @@ export default defineComponent({
     zindex: {
       type: Number,
       required: false,
-      default: 100,
+      default: 1000,
     },
     /** 偏移量，用于 top */
     offset: {
@@ -93,7 +93,7 @@ export default defineComponent({
   },
   // 定义过渡动画完成后的回调
   emits: ['destroy'],
-  setup(props) {
+  setup(props, { expose }) {
     const visible = ref(false); // 是否显示消息
 
     const bindStyle = computed<CSSProperties>(() => ({
@@ -106,12 +106,20 @@ export default defineComponent({
       let iconName = 'InfoIcon';
       if (props.type === 'success') {
         iconName = 'SuccessIcon';
-      } else if (props.type === 'warning') {
+      } else if (props.type === 'warn') {
         iconName = 'WarnIcon';
       } else if (props.type === 'error') {
         iconName = 'ErrorIcon';
       }
       return iconName;
+    });
+
+    function close() {
+      visible.value = false;
+    }
+
+    expose({
+      close,
     });
 
     onMounted(() => {

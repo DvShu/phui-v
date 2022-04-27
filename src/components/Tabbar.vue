@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import { isBlank } from 'ph-utils/lib/index_m';
 
 export default defineComponent({
   name: 'PhTabbar',
@@ -49,21 +50,21 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    /** 选择改变时调用 */
-    onChange: {
-      type: Function as PropType<
-        (tabs: Set<string>, name: string, method: string) => void
-      >,
-      required: false,
-      default: () => {
-        return null;
-      },
+    /** 自定义改变 */
+    customChange: {
+      type: Boolean,
+      default: false,
     },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   data() {
     return {
-      curr: this.type === 'nav' ? this.$route.name : this.modelValue,
+      curr:
+        this.type === 'nav'
+          ? isBlank(this.modelValue as string)
+            ? this.modelValue
+            : this.$route.name
+          : this.modelValue,
     };
   },
   methods: {
@@ -75,24 +76,22 @@ export default defineComponent({
       } else {
         if (this.multiSelect === false) {
           if (name !== this.modelValue) {
-            this.$emit('update:modelValue', name);
+            this.$emit('change', name);
+            if (!this.customChange) {
+              this.$emit('update:modelValue', name);
+            }
           }
         } else {
           if (this.modelValue instanceof Set) {
-            if (this.modelValue.has(name)) {
-              if (this.onChange != null) {
-                this.onChange(this.modelValue as Set<string>, name, 'delete');
-              } else {
+            this.$emit('change', name);
+            if (!this.customChange) {
+              if (this.modelValue.has(name)) {
                 this.modelValue.delete(name);
-              }
-            } else {
-              if (this.onChange != null) {
-                this.onChange(this.modelValue as Set<string>, name, 'add');
               } else {
                 this.modelValue.add(name);
               }
+              this.$emit('update:modelValue', this.modelValue);
             }
-            this.$emit('update:modelValue', this.modelValue);
           }
         }
       }
