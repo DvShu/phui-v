@@ -8,13 +8,14 @@
       @blur="blur"
       :name="name"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
     />
     <span v-if="tip !== ''" class="ph-input-error-tip">{{ tip }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { inject, ref, onUnmounted, watch } from 'vue';
+import { inject, ref, onUnmounted, watch, toRef } from 'vue';
 import Validator, { RuleType } from 'ph-utils/lib/validator_m';
 import { FormRegistInput, validatorKey, formRegistKey } from './types';
 
@@ -28,29 +29,60 @@ interface FormItemProps {
   /** 进行数据验证的方式, change - 输入改变时验证, blur - 失去焦点时验证 */
   trigger?: 'change' | 'blur';
   rules?: RuleType[];
-  modelValue?: string;
+  modelValue?: string | number;
+  autocomplete?: 'on' | 'off';
+  /** 最小值，当 type 为 positive-int 时有效 */
+  min?: number;
+  /** 最大值，当 type 为 positive-int 时有效 */
+  max?: number;
 }
-const tip = ref(''); // 错误提示
+/** 错误提示 */
+const tip = ref('');
 const props = withDefaults(defineProps<FormItemProps>(), {
   type: 'text',
   name: '',
   placeholder: '',
   trigger: 'change',
-  rules: undefined,
-  modelValue: '',
+  autocomplete: 'on',
 });
 const emit = defineEmits(['update:modelValue']);
-
-const inputData = ref(props.modelValue);
+/** 输入框的值 */
+const inputData = ref('');
 
 // 监听主动修改输入框的值
 watch(
   () => props.modelValue,
-  (v) => {
-    inputData.value = v;
-    validData(v);
+  () => {
+    parseModelValue();
   }
 );
+
+/** 比较最大最小值 */
+function compareMinMax(n: number) {
+  if (props.min != null && n < props.min) {
+    n = props.min;
+  }
+  if (props.max != null && n > props.max) {
+    n = props.max;
+  }
+  return n;
+}
+
+/** 解析 modelValue 属性值 */
+function parseModelValue() {
+  let v: string | number = '';
+  if (props.modelValue != null) {
+    v = props.modelValue;
+    if (props.type === 'positive-int') {
+      // 比较最大最小
+      v = compareMinMax(props.modelValue as number);
+      if (v !== props.modelValue) {
+        emit('update:modelValue', v);
+      }
+    }
+  }
+  inputData.value = String(v);
+}
 
 let validator = inject(
   validatorKey,
@@ -110,10 +142,12 @@ function inputText(e: Event) {
     } else {
       v = m[0];
     }
-    $target.value = v;
   }
-  emit('update:modelValue', v);
-  validData(v);
+  if (props.trigger === 'change') {
+    validData(v);
+  }
+  inputData.value = v;
+  emit('update:modelValue', props.type === 'positive-int' ? Number(v) : v);
 }
 
 /** 输入框失去焦点事件 */
@@ -122,6 +156,8 @@ function blur(e: Event) {
     validData((e.target as HTMLInputElement).value);
   }
 }
+
+parseModelValue(); // 解析参数
 
 onUnmounted(() => {
   if (props.rules != null && props.name !== '') {

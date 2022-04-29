@@ -62,8 +62,8 @@ export default defineComponent({
       curr:
         this.type === 'nav'
           ? isBlank(this.modelValue as string)
-            ? this.modelValue
-            : this.$route.name
+            ? this.$route.name
+            : this.modelValue
           : this.modelValue,
     };
   },

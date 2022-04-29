@@ -1,5 +1,7 @@
 <template>
-  <form class="ph-form" @submit.prevent="submit"><slot></slot></form>
+  <form class="ph-form" autocomplete="on" @submit.prevent="submit">
+    <slot></slot>
+  </form>
 </template>
 
 <script setup lang="ts">

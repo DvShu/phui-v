@@ -8,37 +8,15 @@ import {
   CloseIcon,
   ErrorIcon,
   SuccessIcon,
-  Message,
-  Switch,
-  Tabbar,
+  InputNumber,
+  Input as UiInput,
 } from './components';
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
+import type { RuleType } from 'ph-utils/lib/validator_m';
 
-const swt = ref(false);
+const rules: RuleType[] = [{ rule: 'required', message: '请输入用户名' }];
 
-const tabs = [
-  { name: 'tab1', text: '选项卡一' },
-  { name: 'tab2', text: '选项卡二' },
-  { name: 'tab3', text: '选项卡三' },
-  { name: 'tab4', text: '选项卡四' },
-  { name: 'tab5', text: '选项卡五' },
-];
-
-const tab = reactive(new Set<string>(['tab1', 'tab3']));
-
-/** 监听选项卡的改变事件 */
-function tabChange(name: string) {
-  if (tab.has(name)) {
-    console.log('delete: ' + name);
-    tab.delete(name);
-    console.log(tab);
-  } else {
-    if (name === 'tab1' || name === 'tab2') {
-      tab.delete(name === 'tab1' ? 'tab2' : 'tab1');
-    }
-    tab.add(name);
-  }
-}
+const num = ref(1);
 </script>
 
 <template>
@@ -53,20 +31,9 @@ function tabChange(name: string) {
     <ErrorIcon></ErrorIcon>
     <SuccessIcon></SuccessIcon>
   </div>
-  <p>开关</p>
+  <p>输入框</p>
   <div>
-    <Switch v-model="swt"></Switch>
-  </div>
-  <p>选项卡</p>
-  <div>
-    <Tabbar
-      v-model="tab"
-      :tabs="tabs"
-      type="buttons"
-      :multi-select="true"
-      @change="tabChange"
-      :custom-change="true"
-    ></Tabbar>
+    <InputNumber :min="1" :max="10"></InputNumber>
   </div>
 </template>
 
