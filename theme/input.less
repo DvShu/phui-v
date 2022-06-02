@@ -1,21 +1,3 @@
-.ph-input_wrapper {
-  display: inline-block;
-  vertical-align: top;
-  width: 180px;
-  text-align: left;
-  --ph-input-border-radius: 3px;
-  .ph-input {
-    width: 100%;
-  }
-  .ph-input-error-tip {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    font-size: 10px;
-    color: var(--ph-error-color);
-    padding: 2px 0 0 5px;
-  }
-}
 .ph-input {
   outline: none;
   box-sizing: border-box;
@@ -24,13 +6,9 @@
   border: 1px solid #dedede;
   border-radius: var(--ph-input-border-radius, 3px);
   padding: 0 5px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s ease-in-out;
   text-align: inherit;
 }
 .ph-input:focus {
   border-color: var(--ph-primary-color);
-}
-
-.ph-input-error .ph-input {
-  border-color: var(--ph-error-color);
 }

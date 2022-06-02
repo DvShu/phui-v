@@ -76,14 +76,13 @@ export default defineComponent({
       } else {
         if (this.multiSelect === false) {
           if (name !== this.modelValue) {
-            this.$emit('change', name);
             if (!this.customChange) {
               this.$emit('update:modelValue', name);
             }
+            this.$emit('change', name);
           }
         } else {
           if (this.modelValue instanceof Set) {
-            this.$emit('change', name);
             if (!this.customChange) {
               if (this.modelValue.has(name)) {
                 this.modelValue.delete(name);
@@ -92,6 +91,7 @@ export default defineComponent({
               }
               this.$emit('update:modelValue', this.modelValue);
             }
+            this.$emit('change', name);
           }
         }
       }

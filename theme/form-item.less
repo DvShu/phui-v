@@ -1,12 +1,41 @@
 .ph-form-item {
   display: flex;
+  margin-bottom: 18px;
   .ph-form-label {
-    width: 60px;
     display: inline-block;
-    line-height: var(--ph-form-edit-height, 30px);
+    line-height: var(--ph-form-edit-height, 32px);
     flex-shrink: 0;
+    box-sizing: border-box;
+    padding-right: 12px;
+    text-align: right;
   }
-  .ph-input_wrapper {
-    flex-grow: 1;
+  .ph-form__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    position: relative;
+  }
+  .ph-input {
+    width: 100%;
   }
 }
+.ph-form-item.is-required > .ph-form-label::before {
+  content: '*';
+  color: var(--ph-error-color);
+  margin-right: 4px;
+}
+.ph-form-item__error {
+  color: var(--ph-error-color);
+  font-size: 12px;
+  line-height: 1;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 2px;
+}
+.ph-form-item.is-error .ph-input {
+  border-color: var(--ph-error-color);
+}
+
+

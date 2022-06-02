@@ -15,6 +15,7 @@ import Form from './Form.vue';
 import FormItem from './FormItem.vue';
 import TimeIcon from './icon/Time.vue';
 import ArrowDownIcon from './icon/ArrowDown.vue';
+import { FormInstance } from './types';
 
 export {
   Form,
@@ -34,4 +35,5 @@ export {
   UseLinkIcon,
   TimeIcon,
   ArrowDownIcon,
+  type FormInstance,
 };

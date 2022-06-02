@@ -1,34 +1,27 @@
 <template>
-  <div class="ph-input_wrapper" :class="[tip === '' ? '' : 'ph-input-error']">
-    <input
-      v-model="inputData"
-      :type="type === 'positive-int' ? 'text' : type"
-      class="ph-input"
-      @input="inputText"
-      @blur="blur"
-      :name="name"
-      :placeholder="placeholder"
-      :autocomplete="autocomplete"
-    />
-    <span v-if="tip !== ''" class="ph-input-error-tip">{{ tip }}</span>
-  </div>
+  <input
+    v-model="inputData"
+    :type="type === 'positive-int' ? 'text' : type"
+    class="ph-input"
+    @input="inputText"
+    @blur="blur"
+    :name="name"
+    :placeholder="placeholder"
+    :autocomplete="autocomplete"
+  />
 </template>
 
 <script setup lang="ts">
-import { inject, ref, onUnmounted, watch, toRef } from 'vue';
-import Validator, { RuleType } from 'ph-utils/lib/validator_m';
-import { FormRegistInput, validatorKey, formRegistKey } from './types';
+import { inject, ref, watch } from 'vue';
+import { formValidTrigger, formItemValidFunc } from './types';
 
 interface FormItemProps {
   /** 标签 */
-  type?: 'text' | 'positive-int';
+  type?: string;
   /** 原生属性 */
   name?: string;
   /** 原生属性 */
   placeholder?: string;
-  /** 进行数据验证的方式, change - 输入改变时验证, blur - 失去焦点时验证 */
-  trigger?: 'change' | 'blur';
-  rules?: RuleType[];
   modelValue?: string | number;
   autocomplete?: 'on' | 'off';
   /** 最小值，当 type 为 positive-int 时有效 */
@@ -36,18 +29,22 @@ interface FormItemProps {
   /** 最大值，当 type 为 positive-int 时有效 */
   max?: number;
 }
-/** 错误提示 */
-const tip = ref('');
 const props = withDefaults(defineProps<FormItemProps>(), {
   type: 'text',
   name: '',
   placeholder: '',
-  trigger: 'change',
   autocomplete: 'on',
 });
 const emit = defineEmits(['update:modelValue']);
 /** 输入框的值 */
 const inputData = ref('');
+/** 数据验证时机 */
+const trigger = inject<string>(formValidTrigger, '');
+/** 数据验证器 */
+const validData = inject<((name?: string) => void) | null>(
+  formItemValidFunc,
+  null
+);
 
 // 监听主动修改输入框的值
 watch(
@@ -84,52 +81,6 @@ function parseModelValue() {
   inputData.value = String(v);
 }
 
-let validator = inject(
-  validatorKey,
-  props.rules != null && props.name !== ''
-    ? new Validator([{ key: props.name, rules: props.rules }])
-    : null
-);
-
-function error(errMsg?: string) {
-  if (errMsg == null || errMsg === '') {
-    tip.value = '';
-  } else {
-    tip.value = errMsg;
-  }
-}
-
-function isError() {
-  return tip.value != null && tip.value !== '';
-}
-
-function value() {
-  return inputData.value;
-}
-
-const regist = inject<((name: string, ipt: FormRegistInput) => void) | null>(
-  formRegistKey,
-  null
-);
-
-if (regist != null) {
-  regist(props.name, { error, value, isError });
-}
-
-/** 验证数据 */
-function validData(v: string) {
-  if (validator != null && props.name !== '') {
-    validator
-      .validateKey(props.name, v)
-      .then(() => {
-        tip.value = '';
-      })
-      .catch((err: Error) => {
-        tip.value = err.message;
-      });
-  }
-}
-
 /** 输入框输入事件 */
 function inputText(e: Event) {
   let $target = e.target as HTMLInputElement;
@@ -143,27 +94,21 @@ function inputText(e: Event) {
       v = m[0];
     }
   }
-  if (props.trigger === 'change') {
-    validData(v);
-  }
   inputData.value = v;
   emit('update:modelValue', props.type === 'positive-int' ? Number(v) : v);
+  if (trigger === 'change' && validData != null) {
+    validData($target.name);
+  }
 }
 
 /** 输入框失去焦点事件 */
 function blur(e: Event) {
-  if (props.trigger === 'blur') {
-    validData((e.target as HTMLInputElement).value);
+  if (trigger === 'blur' && validData != null) {
+    validData((e.target as HTMLInputElement).name);
   }
 }
 
 parseModelValue(); // 解析参数
-
-onUnmounted(() => {
-  if (props.rules != null && props.name !== '') {
-    validator = null;
-  }
-});
 </script>
 
 <style lang="less"></style>

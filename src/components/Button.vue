@@ -41,7 +41,7 @@ const props = withDefaults(
     /** 加载的时候显示的文本 */
     loadingText?: string;
     /** 是否处于加载状态 */
-    loading: false;
+    loading?: boolean;
   }>(),
   {
     type: 'normal',

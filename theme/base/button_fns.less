@@ -7,9 +7,9 @@
     --ph-btn-bg-color: #fff;
     /* 按钮的边框颜色 */
     --ph-btn-border-color: @color;
-    /* 按钮的悬浮边框 less lighten(var(--ph-primary-color), 10) */
+    /* 按钮的悬浮边框 less lighten(@color, 10) */
     --ph-btn-hover-color: lighten(@color, 10%);
-    /* 按钮的点击颜色 */
+    /* 按钮的点击颜色 less darken(@color, 10%) */
     --ph-btn-active-color: darken(@color, 10%);
   }
 }

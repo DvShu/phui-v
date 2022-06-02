@@ -8,15 +8,16 @@ import {
   CloseIcon,
   ErrorIcon,
   SuccessIcon,
+  Form as PhForm,
+  FormItem as PhFormItem,
+  Button as PhButton,
+  Input as PhInput,
   InputNumber,
-  Input as UiInput,
+  type FormInstance,
 } from './components';
-import { ref, reactive, onMounted } from 'vue';
-import type { RuleType } from 'ph-utils/lib/validator_m';
+import { reactive, toRaw, ref } from 'vue';
 
-const rules: RuleType[] = [{ rule: 'required', message: '请输入用户名' }];
-
-const num = ref(1);
+const a = ref(1);
 </script>
 
 <template>
@@ -31,18 +32,21 @@ const num = ref(1);
     <ErrorIcon></ErrorIcon>
     <SuccessIcon></SuccessIcon>
   </div>
-  <p>输入框</p>
+  <p>表单</p>
   <div>
-    <InputNumber :min="1" :max="10"></InputNumber>
+    <InputNumber v-model="a"></InputNumber>
   </div>
 </template>
 
-<style>
+<style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+}
+.demo-form {
+  width: 300px;
 }
 </style>
