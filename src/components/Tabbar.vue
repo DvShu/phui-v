@@ -32,7 +32,7 @@ export default defineComponent({
   props: {
     /** 配置选项卡, { name, text }[] */
     tabs: {
-      type: Object as PropType<{ name: string; text: string }[]>,
+      type: Object as PropType<{ name: string | number; text: string }[]>,
       required: true,
     },
     /** 风格类型, nav(默认) - 底部导航栏模式, buttons - 按钮组模式  */
@@ -42,7 +42,7 @@ export default defineComponent({
     },
     /** 如果是 buttons 模式的时候，配置默认的选项卡 */
     modelValue: {
-      type: [String, Set],
+      type: [String, Number, Set],
       default: '',
     },
     /** 是否需要多选 */
@@ -61,14 +61,14 @@ export default defineComponent({
     return {
       curr:
         this.type === 'nav'
-          ? isBlank(this.modelValue as string)
+          ? this.modelValue == null || this.modelValue === ''
             ? this.$route.name
             : this.modelValue
           : this.modelValue,
     };
   },
   methods: {
-    tabChange(name: string) {
+    tabChange(name: string | number) {
       if (this.type === 'nav') {
         if (name !== this.curr) {
           (this as any).$router.push({ name });

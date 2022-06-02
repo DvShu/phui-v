@@ -23,3 +23,7 @@ export default defineConfig({
   ]
 })
 ```
+
+### 文档地址
+
+[phui-v wiki](https://gitee.com/towardly/phui-v/wikis/Home)

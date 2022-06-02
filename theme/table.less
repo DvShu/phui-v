@@ -1,0 +1,82 @@
+/* table 表格 */
+.ph-table {
+  width: 100%;
+  background-color: #fff;
+  color: #666;
+  font-size: 14px;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  td,
+  th {
+    padding: 10px 5px;
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  thead tr {
+    background-color: #f2f2f2;
+  }
+
+  tbody {
+    tr {
+      transition: all 0.25s ease-out;
+      &:hover {
+        background-color: #f2f2f2;
+      }
+    }
+  }
+  /* 排序箭头 */
+  .caret-wrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    height: 14px;
+    width: 20px;
+    position: relative;
+
+    .ascending {
+      border-bottom-color: #c0c4cc;
+      top: -5px;
+    }
+    .descending {
+      border-top-color: #c0c4cc;
+      bottom: -3px;
+    }
+  }
+  .sort-caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    position: absolute;
+  }
+  .sort-column {
+    cursor: pointer;
+  }
+  .sort-asc .ascending {
+    border-bottom-color: #4998f4;
+  }
+  .sort-desc .descending {
+    border-top-color: #4998f4;
+  }
+}
+/* 斑马纹 */
+.ph-table-stripe {
+  tbody tr {
+    &:nth-child(even) {
+      background-color: #fafafa;
+    }
+    &:nth-child(even):hover {
+      background-color: #f2f2f2;
+    }
+  }
+}
+/* 没有数据时的提示信息 */
+.ph-table__none-col {
+  color: #999999;
+}
