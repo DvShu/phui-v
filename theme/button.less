@@ -43,7 +43,7 @@
   color: var(--ph-btn-active-color);
   background-color: var(--ph-btn-active-bg-color, var(--ph-btn-bg-color));
 }
-.ph-btn [class*='ph-icon'] + span {
+.ph-btn [class*="ph-icon"] + span {
   margin-left: 5px;
 }
 
@@ -104,6 +104,8 @@
   animation: ph-rotate-frame 1.5s infinite linear;
 }
 
-.ph-btn + .ph-btn {
-  margin-left: 10px;
+.ph-btn-group {
+  .ph-btn + .ph-btn {
+    margin-left: 10px;
+  }
 }

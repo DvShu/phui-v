@@ -14,10 +14,11 @@ import {
   Input as PhInput,
   InputNumber,
   type FormInstance,
-} from './components';
-import { reactive, toRaw, ref } from 'vue';
+  Carousel,
+} from "./components"
+import { reactive, toRaw, ref, onMounted } from "vue"
 
-const a = ref(1);
+const a = ref(1)
 </script>
 
 <template>
@@ -36,6 +37,10 @@ const a = ref(1);
   <div>
     <InputNumber v-model="a"></InputNumber>
   </div>
+  <p>轮播图</p>
+  <div class="carousel-panel">
+    <Carousel></Carousel>
+  </div>
 </template>
 
 <style lang="less">
@@ -46,7 +51,34 @@ const a = ref(1);
   color: #2c3e50;
   margin-top: 60px;
 }
+
 .demo-form {
   width: 300px;
+}
+
+.carousel-panel {
+  height: 200px;
+  border: 1px solid #dedede;
+}
+
+.carousel-panel .swipe-item1 {
+  background-color: #0089dc;
+  color: #fff;
+}
+
+.carousel-panel .swipe-item2 {
+  background-color: #ffd705;
+  color: #000;
+}
+
+.carousel-panel .swipe-item3 {
+  background-color: red;
+  color: #000;
+}
+
+.carousel-panel .ph-swipe-item {
+  font-size: 18px;
+  text-align: center;
+  line-height: 200px;
 }
 </style>
