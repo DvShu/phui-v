@@ -39,7 +39,12 @@ const a = ref(1)
   </div>
   <p>轮播图</p>
   <div class="carousel-panel">
-    <Carousel></Carousel>
+    <Carousel>
+      <div class="swipe-item1">1</div>
+      <div class="swipe-item2">2</div>
+      <div class="swipe-item3">3</div>
+      <div class="swipe-item4">4</div>
+    </Carousel>
   </div>
 </template>
 
@@ -68,15 +73,20 @@ const a = ref(1)
 
 .carousel-panel .swipe-item2 {
   background-color: #ffd705;
-  color: #000;
+  color: #fff;
 }
 
 .carousel-panel .swipe-item3 {
   background-color: red;
-  color: #000;
+  color: #fff;
 }
 
-.carousel-panel .ph-swipe-item {
+.carousel-panel .swipe-item4 {
+  background-color: yellowgreen;
+  color: #fff;
+}
+
+.carousel-panel .ph-carousel-item {
   font-size: 18px;
   text-align: center;
   line-height: 200px;
