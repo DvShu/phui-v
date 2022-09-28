@@ -15,19 +15,21 @@
       <LoadingIcon></LoadingIcon>
       <span>{{ loadingText }}</span>
     </template>
-    <span v-else><slot></slot></span>
+    <template v-else>
+      <slot></slot>
+    </template>
   </button>
 </template>
 
 <script setup lang="ts">
-import LoadingIcon from './icon/Loading.vue';
+import LoadingIcon from "./icon/Loading.vue";
 
 const props = withDefaults(
   defineProps<{
     /**
      * 设置按钮类型；primary, text, normal
      */
-    type?: 'primary' | 'text' | 'normal';
+    type?: "primary" | "text" | "normal";
     /** 是否禁用状态 */
     disabled?: boolean;
     /** 原生的 type 属性 */
@@ -44,13 +46,13 @@ const props = withDefaults(
     loading?: boolean;
   }>(),
   {
-    type: 'normal',
+    type: "normal",
     disabled: false,
-    htmlType: 'button',
+    htmlType: "button",
     block: false,
     circle: false,
     round: false,
-    loadingText: '加载中……',
+    loadingText: "加载中……",
     loading: false,
   }
 );

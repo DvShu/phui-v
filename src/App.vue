@@ -14,10 +14,15 @@ import {
   Input as PhInput,
   InputNumber,
   type FormInstance,
-} from './components';
-import { reactive, toRaw, ref } from 'vue';
+  Message,
+} from "./components";
+import { reactive, toRaw, ref, onMounted } from "vue";
 
 const a = ref(1);
+
+onMounted(() => {
+  Message.error("错误拉");
+});
 </script>
 
 <template>

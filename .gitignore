@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 pnpm-lock.yaml
 lib/*
+.pnp.cjs
+.pnp.loader.mjs
+.yarnrc.yml
+yarn.lock
+.vscode
+.yarn
+package-lock.json
