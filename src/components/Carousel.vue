@@ -11,47 +11,65 @@ export default defineComponent({
     }
   },
   setup(props) {
-    /** 轮播根节点 */
-    const carouselEl = ref<HTMLDivElement>()
     /** 当前页(从0开始) */
     const curr = ref(1)
     /** 宽度 */
     const width = ref(0)
     /** translateX */
     const x = computed(() => curr.value * width.value)
-    const slots = useSlots()
 
-    onMounted(() => {
-      if (carouselEl.value != null) {
-        let rect = carouselEl.value.getBoundingClientRect()
-        width.value = rect.width
-        setTimeout(() => {
-          curr.value = 2
-        }, 3000);
+    return {
+      curr,
+      width,
+      x
+    }
+
+  },
+  mounted() {
+    let carouselEl = this.$refs.carouselEl as HTMLDivElement
+    let rect = carouselEl.getBoundingClientRect()
+    this.width = rect.width
+  },
+  render() {
+    const slots = this.$slots
+
+    let $start = null
+    let $end = null
+    const $dots = []
+    const $wipes = []
+    if (slots.default != null) {
+      const $default = slots.default()
+      const len = $default.length
+      // 循环播放
+      if (this.loop) {
+        // 在首页前面放一个末尾页，在末尾页的后面放一个首页
+        $start = h($default[len - 1], { class: 'ph-carousel-item', 'data-index': 0 })
+        $end = h($default[0], { class: 'ph-carousel-item', 'data-index': len - 1 })
       }
-    })
 
-    return () => h("div", { class: "ph-carousel", ref: carouselEl }, [
-      h("div", {
-        class: "ph-carousel-slides", style: {
-          transform: `translate3d(-${x.value > 0 ? x.value + 'px' : '100%'}, 0, 0)`
-        }
-      }, [width.value > 0 ? [
-        // 循环播放(在首页前面放一个末尾页，在末尾页的后面放一个首页)
-        (props.loop && slots.default != null) ? h((slots as any).default()[(slots as any).default().length - 1], { class: 'ph-carousel-item', 'data-index': 0 }) : null,
-        [slots.default != null ? (slots as any).default().map((slot: any, i: number) => h(slot, { class: 'ph-carousel-item', 'data-index': i + 1 })) : null],
-        // 循环播放(在首页前面放一个末尾页，在末尾页的后面放一个首页)
-        (props.loop && slots.default != null) ? h((slots as any).default()[0], { class: 'ph-carousel-item', 'data-index': (slots as any).default().length - 1 }) : null,
-      ] : null]),
+      for (let i = 0; i < len; i++) {
+        $wipes.push(h($default[i], { class: 'ph-carousel-item', 'data-index': i + 1 }))
+        $dots.push(h('div', {
+          role: "button",
+          class: ['ph-carousel-dot', (i === this.curr - 1) ? 'ph-carousel-dot__active' : '']
+        }))
+      }
+    }
+
+    return h("div", { class: "ph-carousel", ref: 'carouselEl' }, [
+      h("div",
+        {
+          class: "ph-carousel-slides", style: {
+            transform: `translate3d(-${this.x > 0 ? this.x + 'px' : '100%'}, 0, 0)`
+          }
+        }, [$start, $wipes, $end]
+      ),
       h(
         "div",
         { class: "ph-carousel-dots" },
-        [slots.default != null ? (slots as any).default().map((slot: any, i: number) => h('div', {
-          role: "button",
-          class: ['ph-carousel-dot', (i === curr.value - 1) ? 'ph-carousel-dot__active' : '']
-        })) : null]
+        $dots
       ),
     ])
-  },
+  }
 })
 </script>
