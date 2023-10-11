@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import { provide, onUnmounted, reactive } from 'vue';
-import Validator, { RuleType, SchemaType } from 'ph-utils/lib/validator_m';
-import { formItemInfo, formValidError, formValidKeyFunc } from './types';
+import Validator, { RuleType, SchemaType } from 'ph-utils/validator';
+import { formItemInfo, formValidError, formValidKeyFunc } from './types.js';
 
 const props = withDefaults(
   defineProps<{

@@ -1,23 +1,15 @@
 <template>
-  <div
-    :class="[
-      'ph-tabbar',
-      'ph-tabbar-' + type,
-      multiSelect ? 'ph-tabbar-multi' : '',
-    ]"
-  >
-    <div
-      v-for="t in tabs"
-      :key="t.name"
-      class="ph-tabbar-item"
-      :class="{
-        'ph-tabbar-item--active':
-          (type === 'nav' && curr === t.name) ||
-          t.name === modelValue ||
-          (modelValue instanceof Set && modelValue.has(t.name)),
-      }"
-      @click="tabChange(t.name)"
-    >
+  <div :class="[
+    'ph-tabbar',
+    'ph-tabbar-' + type,
+    multiSelect ? 'ph-tabbar-multi' : '',
+  ]">
+    <div v-for="t in tabs" :key="t.name" class="ph-tabbar-item" :class="{
+      'ph-tabbar-item--active':
+        (type === 'nav' && curr === t.name) ||
+        t.name === modelValue ||
+        (modelValue instanceof Set && modelValue.has(t.name)),
+    }" @click="tabChange(t.name)">
       {{ t.text }}
     </div>
   </div>
@@ -25,7 +17,6 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { isBlank } from 'ph-utils/lib/index_m';
 
 export default defineComponent({
   name: 'PhTabbar',

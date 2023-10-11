@@ -1,7 +1,7 @@
-import { VNode, h, render } from 'vue';
-import MessageTemplate from './message.vue';
+import { VNode, h, render } from "vue";
+import MessageTemplate from "./Message.vue";
 
-const messageTypes = ['info', 'success', 'error', 'warn'];
+const messageTypes = ["info", "success", "error", "warn"];
 const instances: VNode[] = []; // 保存所有的消息体
 let seed = 0; // 用于构建多个消息时，构建消息的id，避免重复
 
@@ -16,7 +16,7 @@ interface MessageOption {
   /** 宽度 */
   width?: string;
   /** 自定义类名 */
-  'custom-class'?: string;
+  "custom-class"?: string;
 }
 
 interface MessageInstance {
@@ -50,7 +50,7 @@ function close(id: string) {
     let instance = instances[i];
     if (instance.el != null && instance.component != null) {
       const offset =
-        parseInt(instance.el.style['top'], 10) - removedHeight - 15;
+        parseInt(instance.el.style["top"], 10) - removedHeight - 15;
       instance.component.props.offset = offset;
     }
   }
@@ -58,7 +58,7 @@ function close(id: string) {
 
 const Message: MessageInstance = ((option: string | MessageOption) => {
   // 构建一个新的节点用来渲染提示信息
-  let container = document.createElement('div');
+  let container = document.createElement("div");
   // 计算消息的位置
   let offset = 15;
   for (let vm of instances) {
@@ -69,7 +69,7 @@ const Message: MessageInstance = ((option: string | MessageOption) => {
 
   // 消息id
   const id = `message${++seed}`;
-  const props: any = typeof option === 'string' ? { message: option } : option;
+  const props: any = typeof option === "string" ? { message: option } : option;
   props.id = id;
   props.offset = offset;
   props.onClose = () => {
@@ -91,7 +91,7 @@ const Message: MessageInstance = ((option: string | MessageOption) => {
 messageTypes.forEach((type: string) => {
   Message[type] = (options: string | MessageOption) => {
     let opts: MessageOption =
-      typeof options === 'string' ? { message: options } : options;
+      typeof options === "string" ? { message: options } : options;
     opts.type = type as any;
     return Message(opts);
   };

@@ -1,20 +1,9 @@
 <template>
   <div class="ph-input-number">
-    <span class="ph-input-number__decrease" @click="updateNumber('decrease')"
-      >-</span
-    >
-    <Input
-      type="positive-int"
-      v-model="inputData"
-      autocomplete="off"
-      :name="name"
-      :min="props.min"
-      :max="props.max"
-      @update:model-value="updateModelValue"
-    ></Input>
-    <span class="ph-input-number__increase" @click="updateNumber('increase')"
-      >+</span
-    >
+    <span class="ph-input-number__decrease" @click="updateNumber('decrease')">-</span>
+    <Input type="positive-int" v-model="inputData" autocomplete="off" :name="name" :min="props.min" :max="props.max"
+      @update:model-value="updateModelValue"></Input>
+    <span class="ph-input-number__increase" @click="updateNumber('increase')">+</span>
   </div>
 </template>
 
