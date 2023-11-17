@@ -15,7 +15,7 @@ import {
   InputNumber,
   type FormInstance,
   Message,
-} from "./components";
+} from "./";
 import { reactive, toRaw, ref, onMounted } from "vue";
 
 const a = ref(1);

@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     outDir: "lib",
     lib: {
-      entry: path.resolve(__dirname, "src/components/index.ts"),
+      entry: path.resolve(__dirname, "src/index.ts"),
       formats: ["es"],
       fileName: () => {
         return "index.js";
