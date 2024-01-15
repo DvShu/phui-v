@@ -1,0 +1,43 @@
+.ph-triangle {
+  --ph-triangle-size: 10px;
+  --ph-triangle-width: var(--ph-triangle-size);
+  --ph-triangle-height: var(--ph-triangle-size);
+  --ph-triangle-color: #666;
+  display: inline-block;
+  width: var(--ph-triangle-width);
+  height: var(--ph-triangle-height);
+  background-color: var(--ph-triangle-color);
+  transition: background-color 0.3s;
+}
+
+.ph-triangle-top {
+  clip-path: polygon(
+    calc(var(--ph-triangle-width) / 2) 0,
+    var(--ph-triangle-width) var(--ph-triangle-height),
+    0 var(--ph-triangle-height)
+  );
+}
+
+.ph-triangle-right {
+  clip-path: polygon(
+    0 0,
+    var(--ph-triangle-width) calc(var(--ph-triangle-height) / 2),
+    0 var(--ph-triangle-height)
+  );
+}
+
+.ph-triangle-left {
+  clip-path: polygon(
+    var(--ph-triangle-width) 0,
+    var(--ph-triangle-width) var(--ph-triangle-height),
+    0 calc(var(--ph-triangle-height) / 2)
+  );
+}
+
+.ph-triangle-bottom {
+  clip-path: polygon(
+    0 0,
+    var(--ph-triangle-width) 0,
+    calc(var(--ph-triangle-width) / 2) var(--ph-triangle-height)
+  );
+}

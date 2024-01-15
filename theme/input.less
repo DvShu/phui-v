@@ -1,9 +1,9 @@
 .ph-input {
-  --ph-focus-border-color: var(--ph-primary-color);
+  --ph-focus-border-color: var(--ph-primary-color, #4998f4);
   outline: none;
   box-sizing: border-box;
-  height: var(--ph-form-edit-height);
-  line-height: var(--ph-form-edit-height);
+  height: var(--ph-form-edit-height, 32px);
+  line-height: var(--ph-form-edit-height, 32px);
   border: 1px solid #dedede;
   border-radius: var(--ph-input-border-radius, 3px);
   padding: 0 5px;
@@ -11,5 +11,5 @@
   text-align: inherit;
 }
 .ph-input:focus {
-  border-color: var(---ph-focus-border-color);
+  border-color: var(--ph-focus-border-color);
 }

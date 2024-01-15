@@ -1,7 +1,7 @@
 {
   "name": "phui-v",
   "description": "基于 vue3 的 UI 组件库",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -18,16 +18,16 @@
   },
   "homepage": "https://gitee.com/towardly/phui-v/wikis/Home",
   "devDependencies": {
-    "@babel/types": "^7.23.3",
-    "@types/node": "^20.9.1",
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@babel/types": "^7.23.6",
+    "@types/node": "^20.11.2",
+    "@vitejs/plugin-vue": "^5.0.3",
     "less": "^4.2.0",
-    "ph-utils": "^0.4.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.3",
-    "vue": "^3.3.8",
-    "vue-tsc": "^1.8.22"
+    "ph-utils": "^0.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-plugin-dts": "^3.7.1",
+    "vue": "^3.4.13",
+    "vue-tsc": "^1.8.27"
   },
   "peerDependencies": {
     "ph-utils": "^0.3.4",

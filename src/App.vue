@@ -15,6 +15,7 @@ import {
   InputNumber,
   type FormInstance,
   Message,
+  Triangle,
 } from "./";
 import { reactive, toRaw, ref, onMounted } from "vue";
 
@@ -40,6 +41,17 @@ onMounted(() => {
   <p>表单</p>
   <div>
     <InputNumber v-model="a"></InputNumber>
+    <select class="ph-input">
+      <option>选项一</option>
+      <option value="2">选项二</option>
+    </select>
+  </div>
+  <p>三角形</p>
+  <div>
+    <Triangle></Triangle>
+    <Triangle direction="bottom"></Triangle>
+    <Triangle direction="right"></Triangle>
+    <Triangle direction="left"></Triangle>
   </div>
 </template>
 
@@ -53,5 +65,15 @@ onMounted(() => {
 }
 .demo-form {
   width: 300px;
+}
+.triangle-clip-path {
+  width: 20px;
+  height: 20px;
+  border-top: 20px solid red;
+  clip-path: polygon(
+    0 0,
+    20px 0,
+    10px 20px
+  ); /* 调整坐标值以改变三角形形状和大小 */
 }
 </style>

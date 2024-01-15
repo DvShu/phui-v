@@ -16,6 +16,7 @@ import FormItem from "./components/FormItem.vue";
 import TimeIcon from "./components/icon/Time.vue";
 import ArrowDownIcon from "./components/icon/ArrowDown.vue";
 import { FormInstance } from "./components/types.js";
+import Triangle from "./components/Triangle.vue";
 
 export {
   Form,
@@ -36,4 +37,5 @@ export {
   TimeIcon,
   ArrowDownIcon,
   type FormInstance,
+  Triangle,
 };
