@@ -1,0 +1,51 @@
+.ph-search {
+  --ph-search-width: 100%;
+  --ph-search-height: var(--ph-form-edit-height, 32px);
+  --ph-search-bg-color: #f3f3f3;
+  --ph-search-border-color: var(--ph-search-bg-color);
+  display: flex;
+  width: var(--ph-search-width);
+  height: var(--ph-search-height);
+  align-items: center;
+  border: 1px solid var(--ph-search-border-color);
+  background-color: var(--ph-search-bg-color);
+  border-radius: 5px;
+  padding: 0 10px;
+  .ph-search__prefix {
+    margin-right: 5px;
+    font-size: 0;
+    color: #969799;
+  }
+  .ph-icon {
+    font-size: 16px;
+  }
+
+  .ph-input__inline {
+    /* 移除ios search的默认图标 */
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    display: inline-block;
+    flex: 1;
+    resize: none;
+    min-width: 0;
+    background: 0;
+    color: #323232;
+    font-size: 14px;
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  .ph-search__clear {
+    margin-left: 5px;
+    font-size: 0;
+    cursor: pointer;
+    color: #969799;
+    transition: color 0.3s;
+    &:hover {
+      color: #666;
+    }
+  }
+}

@@ -18,6 +18,7 @@ import {
   Triangle,
   DataList,
   DatePickerOri,
+  Search,
 } from "./";
 import { reactive, toRaw, ref, onMounted } from "vue";
 
@@ -51,6 +52,7 @@ onMounted(() => {
     </select>
     <DataList></DataList>
     <DatePickerOri v-model="selectedDate"></DatePickerOri>
+    <Search></Search>
   </div>
   <p>三角形</p>
   <div>

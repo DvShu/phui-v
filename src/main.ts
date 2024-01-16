@@ -11,6 +11,7 @@ import "../style/form";
 import "../style/form-item";
 import "../style/triangle";
 import "../style/date-picker-ori";
+import "../style/search";
 import App from "./App.vue";
 
 createApp(App).mount("#app");
