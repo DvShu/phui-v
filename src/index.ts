@@ -18,6 +18,7 @@ import ArrowDownIcon from "./components/icon/ArrowDown.vue";
 import { FormInstance } from "./components/types.js";
 import Triangle from "./components/Triangle.vue";
 import DataList from "./components/DataList.vue";
+import DatePickerOri from "./components/DatePickerOri.vue";
 
 export {
 	Form,
@@ -40,4 +41,5 @@ export {
 	type FormInstance,
 	Triangle,
 	DataList,
+	DatePickerOri,
 };

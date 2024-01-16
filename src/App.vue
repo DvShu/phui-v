@@ -17,10 +17,13 @@ import {
   Message,
   Triangle,
   DataList,
+  DatePickerOri,
 } from "./";
 import { reactive, toRaw, ref, onMounted } from "vue";
 
 const a = ref(1);
+
+const selectedDate = ref("2024-01-16");
 
 onMounted(() => {
   Message.error("错误拉");
@@ -47,6 +50,7 @@ onMounted(() => {
       <option value="2">选项二</option>
     </select>
     <DataList></DataList>
+    <DatePickerOri v-model="selectedDate"></DatePickerOri>
   </div>
   <p>三角形</p>
   <div>

@@ -5,7 +5,7 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    direction: "top" | "right" | "bottom" | "left";
+    direction?: "top" | "right" | "bottom" | "left";
   }>(),
   {
     direction: "top",

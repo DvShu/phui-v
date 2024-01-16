@@ -10,6 +10,7 @@ import "../style/tabbar";
 import "../style/form";
 import "../style/form-item";
 import "../style/triangle";
+import "../style/date-picker-ori";
 import App from "./App.vue";
 
 createApp(App).mount("#app");
