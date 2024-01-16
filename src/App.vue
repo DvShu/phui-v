@@ -16,6 +16,7 @@ import {
   type FormInstance,
   Message,
   Triangle,
+  DataList,
 } from "./";
 import { reactive, toRaw, ref, onMounted } from "vue";
 
@@ -45,6 +46,7 @@ onMounted(() => {
       <option>选项一</option>
       <option value="2">选项二</option>
     </select>
+    <DataList></DataList>
   </div>
   <p>三角形</p>
   <div>
